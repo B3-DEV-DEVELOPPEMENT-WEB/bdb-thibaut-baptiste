@@ -1,7 +1,7 @@
-// src/Login.js
-import React, { useState } from 'react';
-import { auth } from './firebaseConfig';
+// src/components/Login.jsx
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { auth } from "../firebaseConfig"; // Import unique de `auth`
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -10,9 +10,11 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
+            console.log("Attempting to log in with ", email);
             await signInWithEmailAndPassword(auth, email, password);
             alert('Login successful');
         } catch (error) {
+            console.error("Login error: ", error);
             alert(error.message);
         }
     };
